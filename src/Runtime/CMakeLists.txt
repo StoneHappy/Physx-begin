@@ -16,10 +16,12 @@ target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:
 
 # Link dependencies    
 target_link_libraries(${TARGET_NAME} PUBLIC
+            ${Physx_LIBRARIES}
           )
-
+message("Physx_INCLUDE_DIRS : ${Physx_INCLUDE_DIRS}")
 target_include_directories(
   ${TARGET_NAME} 
   PUBLIC 
+  ${Physx_INCLUDE_DIRS}
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
 )
