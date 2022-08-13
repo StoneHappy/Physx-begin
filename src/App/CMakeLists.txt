@@ -3,7 +3,6 @@ set(TARGET_NAME ${PROJECT_NAME})
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
 # set(CMAKE_AUTORCC ON)
-
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/source)
 
 file(GLOB CPP_HEAD_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
@@ -21,14 +20,18 @@ set_target_properties(${TARGET_NAME} PROPERTIES FOLDER ${PROJECT_NAME})
 
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/WX->")
 
-target_link_libraries(${TARGET_NAME} ${PROJECT_NAME}Runtime)
+target_link_libraries(${TARGET_NAME} 
+       ${Physx_LIBRARIES}
+)
 
 target_include_directories(
   ${TARGET_NAME} 
   PUBLIC 
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
+  ${Physx_INCLUDE_DIRS}
 )
-
+set_property(TARGET ${TARGET_NAME} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+# set_property(TARGET ${TARGET_NAME} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThread$<$<CONFIG:Release>:Release>")
 # add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
 # COMMAND ${CMAKE_COMMAND} -E make_directory "${BINARY_ROOT_DIR}"
 # COMMAND ${CMAKE_COMMAND} -E copy "${ENGINE_ROOT_DIR}/${TARGET_NAME}.ini" "${BINARY_ROOT_DIR}"

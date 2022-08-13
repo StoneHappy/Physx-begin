@@ -5,7 +5,7 @@ file(GLOB_RECURSE SOURCE_FILES "*.cpp")
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${HEADER_FILES} ${SOURCE_FILES})
 
-add_library(${TARGET_NAME} ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
 set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17)
 set_target_properties(${TARGET_NAME} PROPERTIES FOLDER ${PROJECT_NAME})
@@ -16,7 +16,6 @@ target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:
 
 # Link dependencies    
 target_link_libraries(${TARGET_NAME} PUBLIC
-            ${Physx_LIBRARIES}
           )
 message("Physx_INCLUDE_DIRS : ${Physx_INCLUDE_DIRS}")
 target_include_directories(

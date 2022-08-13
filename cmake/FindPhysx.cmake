@@ -1,4 +1,4 @@
-set(LIB_NAMES PhysX_64 PhysXPvdSDK_static_64 PhysXCommon_64)
+set(LIB_NAMES PhysX_64 PhysXFoundation_64 PhysXExtensions_static_64 PhysXPvdSDK_static_64)
 set(PATH_NAMES PxActor.h)
 
 find_path(Physx_INCLUDE_DIR NAMES PxActor.h PATHS "${Physx_DIR}/PhysX/include" "${Physx_DIR}/PxShared/include")
